@@ -83,4 +83,4 @@ class AutoModelLMScorer(TransformersLMScorer):
     @classmethod
     def _supported_model_names(cls) -> Iterable[str]:
         # sm: not sure what this does
-        return True#GPT2_PRETRAINED_CONFIG_ARCHIVE_MAP.keys()
+        return ["dbmdz/german-gpt2-faust", "thomasdehaene/gpt2-large-dutch-finetune-oscar-10m-3epoch", "antoiloui/belgpt2"]
