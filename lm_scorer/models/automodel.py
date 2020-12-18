@@ -8,6 +8,7 @@ from transformers.tokenization_utils import BatchEncoding
 
 from .abc.transformers import TransformersLMScorer
 
+import pandas as pd
 
 class AutoModelLMScorer(TransformersLMScorer):
     # @overrides
@@ -74,10 +75,14 @@ class AutoModelLMScorer(TransformersLMScorer):
             sent_log_probs = cast(torch.DoubleTensor, sent_log_probs)
             sent_ids = cast(torch.LongTensor, sent_ids)
 
-            output = (sent_log_probs, sent_ids, sent_tokens)
+            
+
+            output = pd.DataFrame({'prob':sent_log_probs,
+                            'id': sent_ids,
+                            'token': sent_tokens})
             outputs.append(output)
 
-        return outputs
+        return pd.concat(outputs)
 
     # @overrides
     @classmethod
