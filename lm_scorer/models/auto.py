@@ -19,6 +19,7 @@ class AutoLMScorer:
 
     @classmethod
     def from_pretrained(cls, model_name: str, **kwargs: Any) -> LMScorer:
+        print('Model name: '+model_name)
         for model_class in cls.MODEL_CLASSES:
             if model_name not in model_class.supported_model_names():
                 continue
