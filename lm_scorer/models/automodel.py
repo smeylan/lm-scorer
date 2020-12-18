@@ -76,13 +76,16 @@ class AutoModelLMScorer(TransformersLMScorer):
             sent_ids = cast(torch.LongTensor, sent_ids)
 
             
+            output = (sent_log_probs, sent_ids, sent_tokens)
+            
+            print(pd.DataFrame({
+                'prob':sent_log_probs,
+                'id': sent_ids,
+                'token': sent_tokens}))
 
-            output = pd.DataFrame({'prob':sent_log_probs,
-                            'id': sent_ids,
-                            'token': sent_tokens})
             outputs.append(output)
 
-        return pd.concat(outputs)
+        return outputs
 
     # @overrides
     @classmethod
