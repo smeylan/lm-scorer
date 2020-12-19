@@ -66,7 +66,7 @@ class AutoModelLMScorer(TransformersLMScorer):
             sent_ids = ids[sent_index, sent_nopad_mask][1:]
             # logits.shape = [len(text[sent_index]) + 1, vocab_size]
             sent_logits = logits[sent_index, sent_nopad_mask][:-1, :]
-            #sm sent_logits[:, self.tokenizer.pad_token_id] = float("-inf")
+            sent_logits[:, self.tokenizer.pad_token_id] = float("-inf")
             # ids_scores.shape = [seq_len + 1]
             sent_ids_scores = sent_logits.gather(1, sent_ids.unsqueeze(1)).squeeze(1)
             # log_prob.shape = [seq_len + 1]
